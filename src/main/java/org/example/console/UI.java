@@ -60,10 +60,16 @@ public class UI {
         System.out.println("Introduceti numele studentului: ");
         String nume = scanner.nextLine();
 
+        System.out.println("Introduceti email-ul studentului: ");
+        String email = scanner.nextLine();
+
+        System.out.println("Introduceti profesorul studentului: ");
+        String tutor = scanner.nextLine();
+
         System.out.println("Introduceti grupa studentului: ");
         int grupa = scanner.nextInt();
 
-        if (service.saveStudent(id, nume, grupa) != 0) {
+        if (service.saveStudent(id, nume, grupa, email, tutor) != 0) {
             System.out.println("Student adaugat cu succes! \n");
         }
         else {
@@ -164,10 +170,16 @@ public class UI {
         System.out.println("Introduceti noul nume al studentului: ");
         String numeNou = scanner.nextLine();
 
+        System.out.println("Introduceti noul email al studentului: ");
+        String email = scanner.nextLine();
+
+        System.out.println("Introduceti noul profesor al studentului: ");
+        String tutor = scanner.nextLine();
+
         System.out.println("Introduceti noua grupa a studentului: ");
         int grupaNoua = scanner.nextInt();
 
-        if (service.updateStudent(id, numeNou, grupaNoua) != 0) {
+        if (service.updateStudent(id, numeNou, grupaNoua, email, tutor) != 0) {
             System.out.println("Student actualizat cu succes! \n");
         }
         else {

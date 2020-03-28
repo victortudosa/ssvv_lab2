@@ -6,11 +6,15 @@ public class Student implements HasID<String> {
     private String idStudent;
     private String nume;
     private int grupa;
+    private String email;
+    private String tutor;
 
-    public Student(String idStudent, String nume, int grupa) {
+    public Student(String idStudent, String nume, int grupa, String email, String tutor) {
         this.idStudent = idStudent;
         this.nume = nume;
         this.grupa = grupa;
+        this.email = email;
+        this.tutor = tutor;
     }
 
     @Override
@@ -35,9 +39,23 @@ public class Student implements HasID<String> {
         this.grupa = grupa;
     }
 
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTutor() {
+        return tutor;
+    }
+    public void setTutor(String tutor) {
+        this.tutor = tutor;
+    }
+
     @Override
     public String toString() {
-        return "Student{" + "idStudent=" + idStudent + ", nume='" + nume + '\'' + ", grupa=" + grupa + '\'' + '}';
+        return "Student{" + "idStudent=" + idStudent + ", nume='" + nume + '\'' + ", grupa=" + '\'' + grupa + '\'' + ", email=" + '\'' + email + '\'' + ", tutor=" + '\'' + tutor + '\'' + '}';
     }
 
     @Override

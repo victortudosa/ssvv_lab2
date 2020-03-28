@@ -29,8 +29,8 @@ public class Service {
 
     public Iterable<Nota> findAllNote() { return notaXmlRepo.findAll(); }
 
-    public int saveStudent(String id, String nume, int grupa) {
-        Student student = new Student(id, nume, grupa);
+    public int saveStudent(String id, String nume, int grupa, String email, String tutor) {
+        Student student = new Student(id, nume, grupa, email, tutor);
         Student result = studentXmlRepo.save(student);
 
         if (result == null) {
@@ -89,8 +89,8 @@ public class Service {
         return 1;
     }
 
-    public int updateStudent(String id, String numeNou, int grupaNoua) {
-        Student studentNou = new Student(id, numeNou, grupaNoua);
+    public int updateStudent(String id, String numeNou, int grupaNoua, String emailNou, String tutorNou) {
+        Student studentNou = new Student(id, numeNou, grupaNoua, "", "");
         Student result = studentXmlRepo.update(studentNou);
 
         if (result == null) {

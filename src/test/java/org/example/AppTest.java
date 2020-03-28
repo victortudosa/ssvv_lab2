@@ -26,8 +26,8 @@ public class AppTest
     @Test
     public void testAddStudentRepo()
     {
-        Student student = new Student("1", "nume", 123);
-        Student student2 = new Student("2", "nume2", 222);
+        Student student = new Student("1", "nume prenume", 123, "test@test.com", "nume");
+        Student student2 = new Student("2", "nume prenume", 222, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
         repo.save(student);
@@ -39,7 +39,7 @@ public class AppTest
     @Test
     public void testAddStudentRepoWhenInvalidDataThrowsException()
     {
-        Student student = new Student("", "nume", 123);
+        Student student = new Student("", "nume", 123, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
         try {
@@ -55,7 +55,7 @@ public class AppTest
     @Test
     public void testAddStudentInvalidID()
     {
-        Student student = new Student("abc", "nume", 123);
+        Student student = new Student("abc", "nume", 123, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
         try {
@@ -71,7 +71,7 @@ public class AppTest
     @Test
     public void testAddStudentInvalidID2()
     {
-        Student student = new Student("-1", "nume", 123);
+        Student student = new Student("-1", "nume", 123, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
         try {
@@ -88,7 +88,7 @@ public class AppTest
     @Test
     public void testAddStudentInvalidName()
     {
-        Student student = new Student("1", "", 123);
+        Student student = new Student("1", "", 123, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
 
@@ -106,7 +106,26 @@ public class AppTest
     @Test
     public void testAddStudentInvalidName2()
     {
-        Student student = new Student("1", "nume 1 das!!", 123);
+        Student student = new Student("1", "nume 1 prenume", 123, "test@test.com", "nume");
+        Validator<Student> validator = new StudentValidator();
+        StudentRepository repo = new StudentRepository(validator);
+
+        try {
+            repo.save(student);
+            assertTrue("It should throw ValidationException", false);
+
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage());
+            assertEquals("Campul Nume trebuie sa contina doar litere si spatii \n", e.getMessage());
+        } catch (Exception e) {
+            assertTrue("It should throw ValidationException", false);
+        }
+    }
+
+    @Test
+    public void testAddStudentInvalidName3()
+    {
+        Student student = new Student("1", "nume penume!!", 123, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
 
@@ -122,9 +141,9 @@ public class AppTest
         }
     }
     @Test
-    public void testAddStudentInvalidName3()
+    public void testAddStudentInvalidName4()
     {
-        Student student = new Student("1", "   ", 123);
+        Student student = new Student("1", "   ", 123, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
 
@@ -143,7 +162,7 @@ public class AppTest
     @Test
     public void testAddStudentInvalidGroup()
     {
-        Student student = new Student("1", "nume", 0);
+        Student student = new Student("1", "nume", 0, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
 
@@ -162,7 +181,7 @@ public class AppTest
     @Test
     public void testAddStudentInvalidGroup2()
     {
-        Student student = new Student("1", "nume", 110);
+        Student student = new Student("1", "nume", 110, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
 
@@ -180,7 +199,7 @@ public class AppTest
     @Test
     public void testAddStudentInvalidGroup3()
     {
-        Student student = new Student("1", "nume", 938);
+        Student student = new Student("1", "nume", 938, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
 
@@ -198,7 +217,7 @@ public class AppTest
     @Test
     public void testAddStudentInvalidGroup4()
     {
-        Student student = new Student("1", "nume", 100);
+        Student student = new Student("1", "nume", 100, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
 
@@ -213,19 +232,153 @@ public class AppTest
             assertTrue("It should throw ValidationException", false);
         }
     }
+
     @Test
     public void testAddStudentValidGroup()
     {
-        Student student = new Student("1", "nume", 200);
+        Student student = new Student("1", "nume", 200, "test@test.com", "nume");
         Validator<Student> validator = new StudentValidator();
         StudentRepository repo = new StudentRepository(validator);
 
         repo.save(student);
-
         assertEquals(student, repo.findOne("1"));
     }
 
+    @Test
+    public void testAddStudentInvalidEmail()
+    {
+        Student student = new Student("1", "nume", 200, "", "nume");
+        Validator<Student> validator = new StudentValidator();
+        StudentRepository repo = new StudentRepository(validator);
 
+        try {
+            repo.save(student);
+            assertTrue("It should throw ValidationException", false);
 
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage());
+            assertEquals("Email invalid! \n", e.getMessage());
+        } catch (Exception e) {
+            assertTrue("It should throw ValidationException", false);
+        }
+    }
+    @Test
+    public void testAddStudentInvalidEmail2()
+    {
+        Student student = new Student("1", "nume", 200, "email", "nume");
+        Validator<Student> validator = new StudentValidator();
+        StudentRepository repo = new StudentRepository(validator);
 
+        try {
+            repo.save(student);
+            assertTrue("It should throw ValidationException", false);
+
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage());
+            assertEquals("Email invalid! \n", e.getMessage());
+        } catch (Exception e) {
+            assertTrue("It should throw ValidationException", false);
+        }
+    }
+    @Test
+    public void testAddStudentInvalidEmail3()
+    {
+        Student student = new Student("1", "nume", 200, "email@domain", "nume");
+        Validator<Student> validator = new StudentValidator();
+        StudentRepository repo = new StudentRepository(validator);
+
+        try {
+            repo.save(student);
+            assertTrue("It should throw ValidationException", false);
+
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage());
+            assertEquals("Email invalid! \n", e.getMessage());
+        } catch (Exception e) {
+            assertTrue("It should throw ValidationException", false);
+        }
+    }
+    @Test
+    public void testAddStudentValidEmail()
+    {
+        Student student = new Student("1", "nume", 200, "email@domain.com", "nume");
+        Validator<Student> validator = new StudentValidator();
+        StudentRepository repo = new StudentRepository(validator);
+
+        repo.save(student);
+        assertEquals(student, repo.findOne("1"));
+    }
+
+    @Test
+    public void testAddStudentInvalidTutor()
+    {
+        Student student = new Student("1", "nume", 200, "email@domain.com", "");
+        Validator<Student> validator = new StudentValidator();
+        StudentRepository repo = new StudentRepository(validator);
+
+        try {
+            repo.save(student);
+            assertTrue("It should throw ValidationException", false);
+
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage());
+            assertEquals("Tutor invalid! \n", e.getMessage());
+        } catch (Exception e) {
+            assertTrue("It should throw ValidationException", false);
+        }
+    }
+    @Test
+    public void testAddStudentInvalidTutor2()
+    {
+        Student student = new Student("1", "nume", 123, "test@test.com", "nume 1 prenume");
+        Validator<Student> validator = new StudentValidator();
+        StudentRepository repo = new StudentRepository(validator);
+
+        try {
+            repo.save(student);
+            assertTrue("It should throw ValidationException", false);
+
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage());
+            assertEquals("Tutor invalid! \n", e.getMessage());
+        } catch (Exception e) {
+            assertTrue("It should throw ValidationException", false);
+        }
+    }
+    @Test
+    public void testAddStudentInvalidTutor3()
+    {
+        Student student = new Student("1", "nume", 123, "test@test.com", "nume prenume!!");
+        Validator<Student> validator = new StudentValidator();
+        StudentRepository repo = new StudentRepository(validator);
+
+        try {
+            repo.save(student);
+            assertTrue("It should throw ValidationException", false);
+
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage());
+            assertEquals("Tutor invalid! \n", e.getMessage());
+        } catch (Exception e) {
+            assertTrue("It should throw ValidationException", false);
+        }
+    }
+    @Test
+    public void testAddStudentInvalidTutor4()
+    {
+        Student student = new Student("1", "nume", 123, "test@test.com", "   ");
+        Validator<Student> validator = new StudentValidator();
+        StudentRepository repo = new StudentRepository(validator);
+
+        try {
+            repo.save(student);
+            assertTrue("It should throw ValidationException", false);
+
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage());
+            assertEquals("Tutor invalid! \n", e.getMessage());
+        } catch (Exception e) {
+            assertTrue("It should throw ValidationException", false);
+        }
+    }
 }

@@ -27,6 +27,6 @@ public class StudentXMLRepository extends AbstractXMLRepository<String, Student>
         String nume = node.getElementsByTagName("Nume").item(0).getTextContent();
         int grupa = Integer.parseInt(node.getElementsByTagName("Grupa").item(0).getTextContent());
 
-        return new Student(ID, nume, grupa);
+        return new Student(ID, nume, grupa, "", "");
     }
 }
