@@ -7,6 +7,7 @@ import org.example.domain.Tema;
 import org.example.repository.NotaXMLRepository;
 import org.example.repository.StudentXMLRepository;
 import org.example.repository.TemaRepository;
+import org.example.validation.ValidationException;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
@@ -40,13 +41,20 @@ public class Service {
     }
 
     public int saveTema(String id, String descriere, int deadline, int startline) {
-        Tema tema = new Tema(id, descriere, deadline, startline);
-        Tema result = temaRepo.save(tema);
 
-        if (result == null) {
+        try {
+            Tema tema = new Tema(id, descriere, deadline, startline);
+            Tema result = temaRepo.save(tema);
+
+            if (result == null) {
+                return 1;
+            }
+            return 0;
+        }
+        catch (ValidationException ve) {
             return 1;
         }
-        return 0;
+
     }
 
     public int saveNota(String idStudent, String idTema, double valNota, int predata, String feedback) {

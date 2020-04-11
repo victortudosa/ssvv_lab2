@@ -41,4 +41,19 @@ public class AppTestWBT {
         assertEquals(result, 0);
     }
 
+    @Test
+    public void testtest() {
+
+        Validator<Tema> validator = new TemaValidator();
+        TemaRepository repo = new TemaRepository(validator);
+
+        //Tema tema = new Tema(1, "descriere", 10, 12);
+
+        Service service = new Service(null, repo, null);
+
+        int result = service.saveTema("", "descriere", 7, 6);
+
+        assertEquals(result, 0);
+    }
+
 }
