@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.domain.Tema;
-import org.example.repository.TemaXMLRepository;
+import org.example.repository.TemaRepository;
 import org.example.service.Service;
 import org.example.validation.TemaValidator;
 import org.example.validation.Validator;
@@ -15,7 +15,7 @@ public class AppTestWBT {
     public void testAddAssignmentValid() {
 
         Validator<Tema> validator = new TemaValidator();
-        TemaXMLRepository repo = new TemaXMLRepository(validator, "testTeme.xml");
+        TemaRepository repo = new TemaRepository(validator);
 
         //Tema tema = new Tema(1, "descriere", 10, 12);
 
@@ -30,7 +30,7 @@ public class AppTestWBT {
     public void testAddAssignmentInvalidID() {
 
         Validator<Tema> validator = new TemaValidator();
-        TemaXMLRepository repo = new TemaXMLRepository(validator, "testTeme.xml");
+        TemaRepository repo = new TemaRepository(validator);
 
         //Tema tema = new Tema(1, "descriere", 10, 12);
 

@@ -6,6 +6,7 @@ import org.example.domain.Student;
 import org.example.domain.Tema;
 import org.example.repository.NotaXMLRepository;
 import org.example.repository.StudentXMLRepository;
+import org.example.repository.TemaRepository;
 import org.example.repository.TemaXMLRepository;
 import org.example.service.Service;
 import org.example.validation.NotaValidator;
@@ -21,9 +22,10 @@ public class Main {
 
         StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
         TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
+        TemaRepository temaRepo = new TemaRepository(temaValidator);
         NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
 
-        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+        Service service = new Service(fileRepository1, temaRepo, fileRepository3);
         UI consola = new UI(service);
         consola.run();
 

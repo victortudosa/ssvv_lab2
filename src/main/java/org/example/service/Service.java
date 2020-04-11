@@ -6,7 +6,7 @@ import org.example.domain.Student;
 import org.example.domain.Tema;
 import org.example.repository.NotaXMLRepository;
 import org.example.repository.StudentXMLRepository;
-import org.example.repository.TemaXMLRepository;
+import org.example.repository.TemaRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
@@ -14,18 +14,18 @@ import java.util.Locale;
 
 public class Service {
     private StudentXMLRepository studentXmlRepo;
-    private TemaXMLRepository temaXmlRepo;
+    private TemaRepository temaRepo;
     private NotaXMLRepository notaXmlRepo;
 
-    public Service(StudentXMLRepository studentXmlRepo, TemaXMLRepository temaXmlRepo, NotaXMLRepository notaXmlRepo) {
+    public Service(StudentXMLRepository studentXmlRepo, TemaRepository temaRepo, NotaXMLRepository notaXmlRepo) {
         this.studentXmlRepo = studentXmlRepo;
-        this.temaXmlRepo = temaXmlRepo;
+        this.temaRepo = temaRepo;
         this.notaXmlRepo = notaXmlRepo;
     }
 
     public Iterable<Student> findAllStudents() { return studentXmlRepo.findAll(); }
 
-    public Iterable<Tema> findAllTeme() { return temaXmlRepo.findAll(); }
+    public Iterable<Tema> findAllTeme() { return temaRepo.findAll(); }
 
     public Iterable<Nota> findAllNote() { return notaXmlRepo.findAll(); }
 
@@ -41,7 +41,7 @@ public class Service {
 
     public int saveTema(String id, String descriere, int deadline, int startline) {
         Tema tema = new Tema(id, descriere, deadline, startline);
-        Tema result = temaXmlRepo.save(tema);
+        Tema result = temaRepo.save(tema);
 
         if (result == null) {
             return 1;
@@ -50,11 +50,11 @@ public class Service {
     }
 
     public int saveNota(String idStudent, String idTema, double valNota, int predata, String feedback) {
-        if (studentXmlRepo.findOne(idStudent) == null || temaXmlRepo.findOne(idTema) == null) {
+        if (studentXmlRepo.findOne(idStudent) == null || temaRepo.findOne(idTema) == null) {
             return -1;
         }
         else {
-            int deadline = temaXmlRepo.findOne(idTema).getDeadline();
+            int deadline = temaRepo.findOne(idTema).getDeadline();
 
             if (predata - deadline > 2) {
                 valNota =  1;
@@ -81,7 +81,7 @@ public class Service {
     }
 
     public int deleteTema(String id) {
-        Tema result = temaXmlRepo.delete(id);
+        Tema result = temaRepo.delete(id);
 
         if (result == null) {
             return 0;
@@ -101,7 +101,7 @@ public class Service {
 
     public int updateTema(String id, String descriereNoua, int deadlineNou, int startlineNou) {
         Tema temaNoua = new Tema(id, descriereNoua, deadlineNou, startlineNou);
-        Tema result = temaXmlRepo.update(temaNoua);
+        Tema result = temaRepo.update(temaNoua);
 
         if (result == null) {
             return 0;
@@ -110,7 +110,7 @@ public class Service {
     }
 
     public int extendDeadline(String id, int noWeeks) {
-        Tema tema = temaXmlRepo.findOne(id);
+        Tema tema = temaRepo.findOne(id);
 
         if (tema != null) {
             LocalDate date = LocalDate.now();
