@@ -68,6 +68,7 @@ public class AppTest
             assertTrue("It should throw ValidationException", false);
         }
     }
+
     @Test
     public void testAddStudentInvalidID2()
     {
