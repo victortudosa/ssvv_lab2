@@ -20,8 +20,6 @@ public class AppTestIntegrationBigBang
     StudentRepository studentRepository;
     TemaRepository temaRepository;
     NotaRepository notaRepository;
-    private StudentRepository studentRepositoryMock;
-    private TemaRepository notaRepositoryMock;
 
 
     @Before
