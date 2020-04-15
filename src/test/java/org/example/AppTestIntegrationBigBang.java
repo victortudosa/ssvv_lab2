@@ -7,15 +7,12 @@ import org.example.domain.Tema;
 import org.example.repository.NotaRepository;
 import org.example.repository.StudentRepository;
 import org.example.repository.TemaRepository;
-import org.example.validation.NotaValidator;
-import org.example.validation.StudentValidator;
-import org.example.validation.TemaValidator;
-import org.example.validation.Validator;
+import org.example.validation.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 
 public class AppTestIntegrationBigBang
@@ -23,6 +20,8 @@ public class AppTestIntegrationBigBang
     StudentRepository studentRepository;
     TemaRepository temaRepository;
     NotaRepository notaRepository;
+    private StudentRepository studentRepositoryMock;
+    private TemaRepository notaRepositoryMock;
 
 
     @Before
@@ -36,9 +35,6 @@ public class AppTestIntegrationBigBang
 
         Validator<Nota> notaValidator = new NotaValidator();
         notaRepository = new NotaRepository(notaValidator);
-
-        studentRepositoryMock = EasyMock.createMock(StudentRepository.class);
-
     }
 
 
@@ -75,11 +71,24 @@ public class AppTestIntegrationBigBang
     public void testAddNotaValid()
     {
         Pair<String, String> pair = new Pair<>("1", "1");
-        Nota nota = new Nota(pair, 10, 6, "bine, bă!");
+        Nota nota = new Nota(pair, 11, 7, "bine, bă!");
 
-        notaRepository.save(nota);
-        assertEquals(nota, notaRepository.findOne(pair));
+        try
+        {
+            notaRepository.save(nota);
+            fail("It should throw ValidationException");
+        }
+        catch (ValidationException e)
+        {
+            System.out.println(e.getMessage());
+            assertEquals("Nota invalida! \n", e.getMessage());
+        }
+        catch (Exception e)
+        {
+            fail("It should throw ValidationException");
+        }
     }
+
 
     @Test
     public void testAll()
