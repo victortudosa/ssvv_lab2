@@ -9,30 +9,29 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class AppTestWBT {
+
+public class AppTestWBT
+{
 
     @Test
-    public void testAddAssignmentValid() {
-
+    public void testAddAssignmentValid()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
-
-        //Tema tema = new Tema(1, "descriere", 10, 12);
 
         Service service = new Service(null, repo, null);
 
         int result = service.saveTema("1", "descriere", 7, 6);
 
-        assertEquals(result, 1);
+        assertEquals(result, 0);
     }
 
-    @Test
-    public void testAddAssignmentInvalidID() {
 
+    @Test
+    public void testAddAssignmentInvalidID()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
-
-        //Tema tema = new Tema(1, "descriere", 10, 12);
 
         Service service = new Service(null, repo, null);
 
@@ -41,9 +40,10 @@ public class AppTestWBT {
         assertEquals(result, 1);
     }
 
-    @Test
-    public void testValidInput1() {
 
+    @Test
+    public void testValidInput1()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
@@ -51,12 +51,13 @@ public class AppTestWBT {
 
         int result = service.saveTema("1", "desc", 14, 1);
 
-        assertEquals(result, 1);
+        assertEquals(result, 0);
     }
 
-    @Test
-    public void testValidInput2() {
 
+    @Test
+    public void testValidInput2()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
@@ -64,26 +65,29 @@ public class AppTestWBT {
 
         int result = service.saveTema("2", "desc", 7, 7);
 
-        assertEquals(result, 1);
+        assertEquals(result, 0);
     }
 
-    @Test
-    public void testInvalidDuplicate() {
 
+    @Test
+    public void testInvalidDuplicate()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
         Service service = new Service(null, repo, null);
 
-        int result = service.saveTema("1", "desc", 8, 6);
-        result = service.saveTema("1", "desc", 8, 6);
+        service.saveTema("1", "desc", 8, 6);
 
-        assertEquals(result, 0);
+        int result = service.saveTema("1", "desc", 8, 6);
+
+        assertEquals(result, 1);
     }
 
-    @Test
-    public void testInvalidIdEmptyString() {
 
+    @Test
+    public void testInvalidIdEmptyString()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
@@ -94,9 +98,10 @@ public class AppTestWBT {
         assertEquals(result, 1);
     }
 
-    @Test
-    public void testInvalidDescriptionEmptyString() {
 
+    @Test
+    public void testInvalidDescriptionEmptyString()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
@@ -107,9 +112,10 @@ public class AppTestWBT {
         assertEquals(result, 1);
     }
 
-    @Test
-    public void testInvalidDeadline() {
 
+    @Test
+    public void testInvalidDeadline()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
@@ -120,9 +126,10 @@ public class AppTestWBT {
         assertEquals(result, 1);
     }
 
-    @Test
-    public void testInvalidStartline() {
 
+    @Test
+    public void testInvalidStartline()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
@@ -133,9 +140,10 @@ public class AppTestWBT {
         assertEquals(result, 1);
     }
 
-    @Test
-    public void testInvalidInterval() {
 
+    @Test
+    public void testInvalidInterval()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
@@ -146,9 +154,10 @@ public class AppTestWBT {
         assertEquals(result, 1);
     }
 
-    @Test
-    public void testInvalidIdNull() {
 
+    @Test
+    public void testInvalidIdNull()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
@@ -159,9 +168,10 @@ public class AppTestWBT {
         assertEquals(result, 1);
     }
 
-    @Test
-    public void testInvalidDescriptionNull() {
 
+    @Test
+    public void testInvalidDescriptionNull()
+    {
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
 
