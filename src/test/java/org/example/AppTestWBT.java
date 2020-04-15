@@ -42,7 +42,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test3() {
+    public void testValidInput1() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -55,7 +55,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test4() {
+    public void testValidInput2() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -68,7 +68,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test5() {
+    public void testInvalidDuplicate() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -82,7 +82,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test6() {
+    public void testInvalidIdEmptyString() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -95,7 +95,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test7() {
+    public void testInvalidDescriptionEmptyString() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -108,7 +108,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test8() {
+    public void testInvalidDeadline() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -121,7 +121,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test9() {
+    public void testInvalidStartline() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -134,7 +134,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test10() {
+    public void testInvalidInterval() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -147,7 +147,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test11() {
+    public void testInvalidIdNull() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -160,7 +160,7 @@ public class AppTestWBT {
     }
 
     @Test
-    public void test12() {
+    public void testInvalidDescriptionNull() {
 
         Validator<Tema> validator = new TemaValidator();
         TemaRepository repo = new TemaRepository(validator);
@@ -171,6 +171,4 @@ public class AppTestWBT {
 
         assertEquals(result, 1);
     }
-
-
 }
