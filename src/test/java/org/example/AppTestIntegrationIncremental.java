@@ -47,7 +47,7 @@ public class AppTestIntegrationIncremental
 
 
     @Test
-    public void testAddStudentValid()
+    public void testAddStudentValidIncremental()
     {
         Student student = new Student("1", "nume", 200, "email@domain.com", "nume");
 
@@ -57,9 +57,9 @@ public class AppTestIntegrationIncremental
 
 
     @Test
-    public void testAddTemaValid()
+    public void testAddTemaValidIncremental()
     {
-        testAddStudentValid();
+        testAddStudentValidIncremental();
 
         Tema tema = new Tema("1", "desc", 8, 5);
 
@@ -69,10 +69,10 @@ public class AppTestIntegrationIncremental
 
 
     @Test
-    public void testAddNotaNotValid()
+    public void testAddNotaNotValidIncremental()
     {
-        testAddStudentValid();
-        testAddTemaValid();
+        testAddStudentValidIncremental();
+        testAddTemaValidIncremental();
 
         Pair<String, String> pair = new Pair<>("1", "1");
         Nota nota = new Nota(pair, 11, 7, "bine, bă!");
